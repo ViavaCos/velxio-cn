@@ -87,38 +87,8 @@ interface ComponentPickerModalProps {
   onSelectBoard?: (kind: BoardKind) => void;
 }
 
-const BOARD_DESCRIPTIONS: Record<BoardKind, string> = {
-  'arduino-uno': '8-bit AVR, 32KB flash, 14 digital I/O',
-  'arduino-nano': 'Compact 8-bit AVR, same as Uno',
-  'arduino-mega': '8-bit AVR, 256KB flash, 54 digital I/O',
-  'raspberry-pi-pico': 'RP2040 dual-core Cortex-M0+',
-  'pi-pico-w': 'RP2040 + WiFi/BT, same emulator as Pico',
-  'raspberry-pi-zero': 'ARM Cortex-A7, 1 core / 512 MB, Linux/Python (QEMU)',
-  'raspberry-pi-1': 'Pi 1 B+, ARM Cortex-A7 profile, Linux/Python (QEMU)',
-  'raspberry-pi-2': 'Pi 2B, ARM Cortex-A7 quad-core, Linux/Python (QEMU)',
-  'raspberry-pi-3': 'ARM64 Cortex-A53 quad-core, Linux/Python (QEMU)',
-  'raspberry-pi-4': 'ARM64 Cortex-A72 quad-core, Linux/Python (QEMU)',
-  'raspberry-pi-5': 'ARM64 Cortex-A76 quad-core + RP1 I/O, Linux/Python (QEMU)',
-  esp32: 'Xtensa LX6 dual-core, WiFi+BT, 38 GPIO (QEMU)',
-  'esp32-devkit-c-v4': 'ESP32 DevKit C V4, official Espressif (QEMU)',
-  'esp32-cam': 'ESP32 + 2MP camera, microSD (QEMU)',
-  'wemos-lolin32-lite': 'Compact ESP32, LiPo battery support (QEMU)',
-  'esp32-s3': 'Xtensa LX7 dual-core, WiFi+BT, AI accel (QEMU)',
-  'xiao-esp32-s3': 'Seeed XIAO tiny form, 8MB flash+PSRAM (QEMU)',
-  'arduino-nano-esp32': 'Nano form-factor, ESP32-S3, RGB LED (QEMU)',
-  'esp32-c3': 'RISC-V single-core, WiFi+BLE, 22 GPIO (QEMU)',
-  'xiao-esp32-c3': 'Seeed XIAO ESP32-C3 mini board (QEMU)',
-  'aitewinrobot-esp32c3-supermini': 'ESP32-C3 SuperMini (QEMU)',
-  'stm32-bluepill': 'STM32F103C8 Cortex-M3, 64KB flash, 37 GPIO (QEMU)',
-  'stm32-blackpill': 'STM32F411CE Cortex-M4, 512KB flash, 50 GPIO (QEMU)',
-  'stm32-bluepill-f103cb': 'STM32F103CB Cortex-M3, 128KB flash, 37 GPIO (QEMU)',
-  'stm32-blackpill-f401': 'STM32F401CE Cortex-M4, 512KB flash, 50 GPIO (QEMU)',
-  'stm32-f4-discovery': 'STM32F407VG Cortex-M4, 1MB flash, 4 onboard LEDs (QEMU)',
-  'stm32-olimex-h405': 'Olimex STM32-H405, F405RG Cortex-M4, 1MB flash (QEMU)',
-  'stm32-netduino-plus2': 'Netduino Plus 2, STM32F405 Cortex-M4 (QEMU)',
-  'stm32-netduino2': 'Netduino 2, STM32F205 Cortex-M3 (QEMU, serial)',
-  attiny85: '8-bit AVR, 8KB flash, 6 GPIO (browser)',
-};
+// Board descriptions now live in the i18n bundle (common2.json → boards.*)
+// and are read via t(`boards.${kind}`).
 
 /**
  * wokwi-elements ships art for boards Velxio does not emulate; the metadata
@@ -1193,6 +1163,7 @@ interface BoardCardProps {
 }
 
 const BoardCard: React.FC<BoardCardProps> = ({ kind, onSelect, hoverApi }) => {
+  const { t } = useTranslation();
   const thumbnailRef = React.useRef<HTMLDivElement>(null);
   const cardRef = React.useRef<HTMLButtonElement>(null);
   const nearViewport = useNearViewport(cardRef);
@@ -1201,7 +1172,7 @@ const BoardCard: React.FC<BoardCardProps> = ({ kind, onSelect, hoverApi }) => {
       id: kind,
       name: BOARD_KIND_LABELS[kind],
       category: 'Boards',
-      description: BOARD_DESCRIPTIONS[kind] ?? getProBoard(kind)?.description ?? '',
+      description: t(`boards.${kind}`, { defaultValue: getProBoard(kind)?.description ?? '' }),
       pinCount: 0,
       properties: [],
       tags: [],
@@ -1295,7 +1266,9 @@ const BoardCard: React.FC<BoardCardProps> = ({ kind, onSelect, hoverApi }) => {
       </div>
       <div className="card-content">
         <div className="card-name">{BOARD_KIND_LABELS[kind]}</div>
-        <div className="card-description">{BOARD_DESCRIPTIONS[kind] ?? getProBoard(kind)?.description}</div>
+        <div className="card-description">
+          {t(`boards.${kind}`, { defaultValue: getProBoard(kind)?.description ?? '' })}
+        </div>
       </div>
     </button>
   );

@@ -18,6 +18,7 @@
 import React, { useEffect, useMemo, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
+import { i18n } from '../../i18n';
 import type { BoardKind } from '../../types/board';
 import { BOARD_KIND_LABELS } from '../../types/board';
 import { blockedByBoardGate, isProBoardKind } from '../../lib/proBoardGate';
@@ -42,29 +43,8 @@ interface NewProjectDialogProps {
   onClose: () => void;
 }
 
-/** Card blurbs (same voice as the component picker's board descriptions). */
-const BOARD_BLURBS: Record<string, string> = {
-  'arduino-uno': '8-bit AVR, 32KB flash, 14 digital I/O',
-  'arduino-mega': '8-bit AVR, 256KB flash, 54 digital I/O',
-  'arduino-nano': '8-bit AVR, 32KB flash, breadboard-size Uno',
-  'arduino-nano-esp32': 'ESP32-S3 in the Nano footprint, WiFi+BT (QEMU)',
-  esp32: 'Xtensa LX6 dual-core, WiFi+BT, 38 GPIO (QEMU)',
-  'esp32-cam': 'ESP32 + OV2640 camera, streams to LCD (QEMU)',
-  'xiao-esp32-s3': 'Seeed XIAO tiny form, 8MB flash+PSRAM (QEMU)',
-  'xiao-esp32-c3': 'Seeed XIAO ESP32-C3 mini board (QEMU)',
-  'stm32-bluepill': 'STM32F103C8 Cortex-M3, 64KB flash, 37 GPIO (QEMU)',
-  'stm32-blackpill': 'STM32F411CE Cortex-M4, 512KB flash, 50 GPIO (QEMU)',
-  'stm32-bluepill-f103cb': 'STM32F103CB Cortex-M3, 128KB flash, 37 GPIO (QEMU)',
-  'stm32-blackpill-f401': 'STM32F401CE Cortex-M4, 512KB flash, 50 GPIO (QEMU)',
-  'stm32-f4-discovery': 'STM32F407VG Cortex-M4, 1MB flash, 4 onboard LEDs (QEMU)',
-  'stm32-olimex-h405': 'Olimex STM32-H405, F405RG Cortex-M4, 1MB flash (QEMU)',
-  'stm32-netduino-plus2': 'Netduino Plus 2, STM32F405 Cortex-M4 (QEMU)',
-  'stm32-netduino2': 'Netduino 2, STM32F205 Cortex-M3 (QEMU, serial)',
-  'raspberry-pi-pico': 'RP2040 dual-core Cortex-M0+',
-  'raspberry-pi-3': 'ARM64 Cortex-A53 quad-core, Linux/Python (QEMU)',
-  'raspberry-pi-4': 'ARM64 Cortex-A72 quad-core, Linux/Python (QEMU)',
-  'raspberry-pi-5': 'ARM64 Cortex-A76 quad-core + RP1 I/O, Linux/Python (QEMU)',
-};
+// Card blurbs now live in the i18n bundle (common2.json → boards.blurb.*)
+// and are read via the `t` passed into buildStarterSections.
 
 const STM32_BOARDS: BoardKind[] = [
   'stm32-bluepill',
@@ -234,8 +214,11 @@ export interface StarterSection {
  * when the private overlay mounted — an OSS build simply doesn't show those
  * cards, and a section left with no entries is not rendered at all.
  */
-export function buildStarterSections(defs: ProBoardDef[]): StarterSection[] {
-  const oss = (k: BoardKind) => ({ kind: k as string, blurb: BOARD_BLURBS[k] ?? '' });
+export function buildStarterSections(
+  defs: ProBoardDef[],
+  t: (k: string) => string = (k) => i18n.t(k),
+): StarterSection[] {
+  const oss = (k: BoardKind) => ({ kind: k as string, blurb: t(`boards.blurb.${k}`) ?? '' });
   const pro = (k: string) => {
     const d = defs.find((x) => x.kind === k);
     return d ? [{ kind: d.kind, blurb: d.description }] : [];
@@ -326,7 +309,7 @@ export const NewProjectDialog: React.FC<NewProjectDialogProps> = ({ isOpen, onCl
   );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const sections = useMemo(() => buildStarterSections(listProBoards()), [proBoardsVersion]);
+  const sections = useMemo(() => buildStarterSections(listProBoards(), t), [proBoardsVersion]);
 
   useEffect(() => {
     if (!isOpen) return;

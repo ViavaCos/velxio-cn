@@ -121,24 +121,24 @@
     "rpi": {
       "hero": {
         "title": "Raspberry Pi 3 模拟器",
-        "accent": "Python · GPIO · I2C — In Your Browser",
-        "subtitle": "Run Raspberry Pi projects in your browser: write Python against the circuit on the canvas with RPi.GPIO, gpiozero and smbus2, the libraries real Pi projects use. Scripts start in seconds on the in-browser engine; a Linux guest on our servers is one click away when a script needs a shell.",
+        "accent": "Python · GPIO · I2C —— 在浏览器中运行",
+        "subtitle": "在浏览器中运行树莓派项目：使用真实树莓派项目所用的 RPi.GPIO、gpiozero 与 smbus2 库，针对画布上的电路编写 Python。脚本在浏览器内引擎上数秒即可启动；当脚本需要终端时，我们服务器上的 Linux 客户机只需一键即可启用。",
         "ctaPrimary": "打开Pi 3仿真器",
         "ctaSecondary": "阅读文档",
-        "trust": "In-browser Python · QEMU Linux guest · Three free trial sessions, then Maker and Pro plans",
+        "trust": "浏览器内 Python · QEMU Linux 客户机 · 三次免费试用，之后为 Maker 与 Pro 套餐",
         "imageAlt": "Raspberry Pi 3板示意图"
       },
       "what": {
         "heading": "你能用Pi 3仿真器做什么？",
-        "lead": "Velxio runs your Raspberry Pi scripts against the sensors, displays and actuators you wire on the canvas — the same component models an Arduino or ESP32 talks to. Two engines: Python in the browser by default, and a QEMU Linux guest when you want a terminal.",
+        "lead": "Velxio 在你的树莓派脚本与你在画布上接线的传感器、显示屏和执行器之间建立连接——所用元件模型与 Arduino 或 ESP32 完全一致。两套引擎：默认在浏览器中运行 Python，需要终端时则启用 QEMU Linux 客户机。",
         "pythonTitle": "运行Python脚本",
-        "pythonBody": "Python 3 with RPi.GPIO, gpiozero, smbus2 and pyserial. GPIO in and out, PWM, UART and I2C sensors on the header bus; third-party packages through a requirements.txt.",
+        "pythonBody": "Python 3，内置 RPi.GPIO、gpiozero、smbus2 与 pyserial。通过排针总线实现 GPIO 输入/输出、PWM、UART 以及 I2C 传感器；第三方包通过 requirements.txt 安装。",
         "gpioTitle": "GPIO控制",
         "gpioBody": "使用RPi.GPIO或gpiozero控制LED、读取按钮、驱动电机——QEMU中的真实GPIO仿真。",
         "linuxTitle": "Linux终端",
-        "linuxBody": "Optional Linux mode boots an Alpine guest in QEMU with a real shell and python3. It is not Raspberry Pi OS: no apt, no desktop, no network from inside the guest.",
+        "linuxBody": "可选的 Linux 模式会在 QEMU 中启动一个 Alpine 客户机，提供真实 shell 与 python3。它不是 Raspberry Pi OS：客户机内无 apt、无桌面、无法访问网络。",
         "armTitle": "ARM Cortex-A53",
-        "armBody": "The Linux guest runs a 64-bit ARM kernel under QEMU (32-bit for the Zero, 1 and 2) with the CPU profile of the board you picked.",
+        "armBody": "Linux 客户机在 QEMU 下运行 64 位 ARM 内核（Zero、1、2 为 32 位），并采用你所选开发板的 CPU 配置。",
         "sdTitle": "无需SD卡",
         "sdBody": "操作系统镜像已预加载。无需刷写，无需SD卡，无需电源——只需打开浏览器即可开始编码。",
         "multiTitle": "多板画布",
@@ -150,20 +150,20 @@
         "picoBodyPrefix": "微控制器。ARM Cortex-M0+，133 MHz。运行Arduino C++代码。无操作系统，裸机。最适合嵌入式、物联网、传感器。",
         "picoLink": "尝试Pico仿真器",
         "pi3Title": "Raspberry Pi 3 (ARM Cortex-A53)",
-        "pi3Body": "A Linux single-board computer. Runs Python scripts against the canvas, in the browser or in a QEMU guest with a shell. Best for GPIO scripting, sensors over I2C, automation and education."
+        "pi3Body": "一款 Linux 单板计算机。可在浏览器中或通过带 shell 的 QEMU 客户机运行针对画布的 Python 脚本。最适合 GPIO 脚本、I2C 传感器、自动化与教学。"
       },
       "faq": {
         "heading": "常见问题",
         "q1": "我可以在浏览器中模拟Raspberry Pi 3吗？",
-        "a1": "Yes. Velxio runs Raspberry Pi projects (Zero through Pi 5) in your browser: Python scripts execute against the circuit on the canvas, and a Linux guest under QEMU gives you a terminal when a script needs one. The guest is Alpine Linux, not Raspberry Pi OS.",
+        "a1": "可以。Velxio 在浏览器中运行树莓派项目（从 Zero 到 Pi 5）：Python 脚本针对画布上的电路执行；当脚本需要终端时，QEMU 下的 Linux 客户机提供终端。该客户机为 Alpine Linux，而非 Raspberry Pi OS。",
         "q2": "Raspberry Pi 模拟器包含在免费套餐中吗？",
         "a2": "部分包含。任何账户都可以搭建并保存 Raspberry Pi 电路，免费账户还有三次 15 分钟的试用会话来运行它（会话期间的每次运行都免费）。不限次数的 Raspberry Pi Linux 模拟会在我们的服务器上运行完整的 ARM 客户机，因此属于 Maker 和 Pro 方案，或带付费许可证的 Velxio Desktop。编辑器以及 Arduino、ESP32 和 Raspberry Pi Pico 模拟器免费且无需账户。Velxio 本身仍然开源（GNU AGPLv3）。",
         "q3": "我可以在Raspberry Pi仿真器上运行Python脚本吗？",
-        "a3": "Yes. Python 3 runs in the browser with RPi.GPIO, gpiozero and smbus2, or in the Linux guest. Third-party packages are installed from a requirements.txt in your project; pip cannot reach the internet from inside the guest.",
+        "a3": "可以。Python 3 可在浏览器中借助 RPi.GPIO、gpiozero 与 smbus2 运行，也可在 Linux 客户机中运行。第三方包通过项目内的 requirements.txt 安装；pip 无法从客户机内访问互联网。",
         "q4": "Pi Pico和Pi 3仿真有什么区别？",
-        "a4": "Raspberry Pi Pico (RP2040) is a microcontroller — it runs Arduino C++ or MicroPython, no OS. Raspberry Pi Zero through 5 are Linux computers — they run Python scripts, and in Linux mode a shell. Velxio supports both.",
+        "a4": "Raspberry Pi Pico（RP2040）是微控制器——运行 Arduino C++ 或 MicroPython，无操作系统。Raspberry Pi Zero 到 5 是 Linux 计算机——运行 Python 脚本，在 Linux 模式下还提供 shell。Velxio 两者皆支持。",
         "q5": "它支持Raspberry Pi 3上的GPIO吗？",
-        "a5": "Yes. RPi.GPIO and gpiozero drive LEDs, read buttons and PIR sensors, and PWM reaches servos and dimmed LEDs. I2C sensors on the header bus (SDA on GPIO2, SCL on GPIO3) answer through smbus2. A Pi has no analog input: a potentiometer needs an MCP3008 or ADS1115 between it and the Pi."
+        "a5": "可以。RPi.GPIO 与 gpiozero 可驱动 LED、读取按钮与 PIR 传感器，PWM 可控制舵机与可调亮度的 LED。排针总线上的 I2C 传感器（SDA 接 GPIO2，SCL 接 GPIO3）通过 smbus2 响应。树莓派没有模拟输入：电位器需在它与树莓派之间接入 MCP3008 或 ADS1115。"
       },
       "bottom": {
         "title": "准备好模拟Raspberry Pi 3了吗？",

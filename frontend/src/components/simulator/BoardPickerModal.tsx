@@ -13,20 +13,8 @@ const PRO_FALLBACK_ICON = (
 );
 
 
-const BOARD_DESCRIPTIONS: Record<BoardKind, string> = {
-  'arduino-uno': '8-bit AVR, 32KB flash, 14 digital I/O',
-  'arduino-nano': 'Compact 8-bit AVR, same as Uno',
-  'arduino-mega': '8-bit AVR, 256KB flash, 54 digital I/O',
-  'raspberry-pi-pico': 'RP2040 dual-core Cortex-M0+',
-  'raspberry-pi-3': 'ARM64 Cortex-A53 quad-core, Linux/Python (QEMU)',
-  'raspberry-pi-4': 'ARM64 Cortex-A72 quad-core, Linux/Python (QEMU)',
-  'raspberry-pi-5': 'ARM64 Cortex-A76 quad-core + RP1 I/O, Linux/Python (QEMU)',
-  esp32: 'Xtensa LX6 dual-core, WiFi+BT, 38 GPIO (QEMU)',
-  'esp32-s3': 'Xtensa LX7 dual-core, WiFi+BT, AI accel (QEMU)',
-  'esp32-c3': 'RISC-V single-core, WiFi+BLE, 22 GPIO (QEMU)',
-  'stm32-bluepill': 'STM32F103C8 Cortex-M3, 64KB flash, 37 GPIO (QEMU)',
-  'stm32-blackpill': 'STM32F411CE Cortex-M4, 512KB flash, 50 GPIO (QEMU)',
-};
+// Board descriptions now live in the i18n bundle (common2.json → boards.*)
+// and are read via t(`boards.${kind}`).
 
 const BOARD_ICON: Record<BoardKind, string> = {
   'arduino-uno': '⬤',
@@ -137,7 +125,7 @@ export const BoardPickerModal = ({ isOpen, onClose, onSelectBoard }: BoardPicker
               <div>
                 <div style={{ fontWeight: 600, fontSize: 14 }}>{BOARD_KIND_LABELS[kind]}</div>
                 <div style={{ fontSize: 11, color: 'var(--wb-10)', marginTop: 2 }}>
-                  {BOARD_DESCRIPTIONS[kind]}
+                  {t(`boards.${kind}`)}
                 </div>
               </div>
             </button>

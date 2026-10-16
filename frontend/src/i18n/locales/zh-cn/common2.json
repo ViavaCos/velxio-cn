@@ -11,7 +11,9 @@
       "run": {
         "addBoard": "添加要运行的板",
         "runMicropython": "运行 MicroPython",
-        "run": "运行 (如需则自动编译)"
+        "run": "运行 (如需则自动编译)",
+        "runActiveOnly": "仅运行 {{name}}",
+        "options": "运行选项"
       },
       "stop": "停止",
       "reset": "重置",
@@ -41,8 +43,8 @@
       "githubSyncLabel": "同步到 GitHub",
       "uploadFirmwareLabel": "上传固件",
       "recordLabel": "录制仿真",
-      "themeToLight": "Switch to light theme",
-      "themeToDark": "Switch to dark theme"
+      "themeToLight": "切换到浅色主题",
+      "themeToDark": "切换到深色主题"
     },
     "fileExplorer": {
       "workspace": "工作区",
@@ -188,7 +190,10 @@
         "rotate": "旋转 (R)",
         "copy": "复制开发板 (Ctrl+C)",
         "paste": "粘贴 (Ctrl+V)"
-      }
+      },
+      "addNodeHere": "在此添加节点",
+      "probeWire": "添加到示波器",
+      "probeNothing": "这根导线暂无可被示波器读取的信号。请将其连接到开发板引脚，或运行电路，让求解器为其计算出电压。"
     },
     "componentPicker": {
       "title": "添加元件",
@@ -199,7 +204,11 @@
       "boards": "板",
       "loading": "加载元件中...",
       "noResults": "未找到元件",
-      "clearFilters": "清除筛选"
+      "clearFilters": "清除筛选",
+      "categoriesTree": "元件分类",
+      "recentlyUsed": "最近使用",
+      "searchResults": "搜索结果",
+      "searchChip": "搜索"
     },
     "libraryManager": {
       "title": "库管理器",
@@ -414,17 +423,18 @@
       "run": "运行",
       "hideExplorer": "隐藏文件资源管理器",
       "showExplorer": "显示文件资源管理器",
-      "appearance": "Appearance",
-      "themeDark": "Dark",
-      "themeLight": "Light",
-      "themeSystem": "Match system"
+      "appearance": "外观",
+      "themeDark": "深色",
+      "themeLight": "浅色",
+      "themeSystem": "跟随系统",
+      "account": "账户"
     },
     "inspector": {
       "propertiesTab": "属性",
       "datasheetTab": "数据手册",
       "examplesTitle": "示例项目",
       "productPage": "产品页面",
-      "datasheetPage": "Specifications",
+      "datasheetPage": "规格",
       "sensorValues": "传感器数值",
       "sensorValuesHint": "仿真开始时传感器使用的数值，Reset 也会恢复到这些数值。运行时拖动滑块不会改变它们。"
     },
@@ -489,6 +499,33 @@
       "revision": "实际开发板版本",
       "saveToDrive": "复制到开发板驱动器",
       "savedToDrive": "已将 {{file}} 复制到 {{drive}}。开发板会重启并运行你的程序。"
+    },
+    "compileProgress": {
+      "compiling": "正在编译 {{board}}…",
+      "compilingBoards_one": "正在编译 {{count}} 块开发板…",
+      "compilingBoards_other": "正在编译 {{count}} 块开发板…",
+      "queued": "正在等待编译资源…",
+      "queuedHint": "你的编译任务已在队列中。它会自动开始，且不会被取消。",
+      "preparing": "正在准备编译…",
+      "done": "编译成功",
+      "failed": "编译失败",
+      "serverLoad": "编译服务器负载",
+      "load": {
+        "low": "空闲",
+        "moderate": "中等",
+        "high": "繁忙",
+        "peak": "非常繁忙"
+      },
+      "priority": "优先编译",
+      "showOutput": "显示输出",
+      "hide": "隐藏（编译仍在继续）"
+    },
+    "newProject": {
+      "title": "新建项目",
+      "subtitle": "选择一个空白工作区，或一块已附带可运行 Blink 示例的开发板。这将替换当前工作区中的全部内容。",
+      "blankTitle": "空白项目",
+      "blankDesc": "空白工作区——自行添加开发板和元件",
+      "cancel": "取消"
     }
   },
   "about": {
@@ -565,6 +602,125 @@
       "title": "准备好尝试 Velxio 了吗？",
       "subtitle": "无需注册。100% 在浏览器中运行。免费且开源。",
       "openEditor": "打开编辑器"
+    }
+  },
+  "tools": {
+    "imageToCode": {
+      "title": "将图片转换为 OLED 显示屏用的 C 数组",
+      "intro": "拖入一张图片，即可获得可直接粘贴进 Arduino 草图的单色 C 字节数组。调整阈值与抖动后，在烧录前于模拟的 128x64 SSD1306 上查看效果。",
+      "inputHeading": "图片",
+      "dropTitle": "拖入图片，或点击选择",
+      "dropHint": "PNG、JPG、GIF、BMP、WebP 或 SVG。也可使用 Ctrl+V 粘贴。",
+      "loaded": "已加载",
+      "errorDecode": "无法读取该图片，请尝试 PNG 或 JPG。",
+      "errorCopy": "剪贴板被阻止。请选中代码后手动复制。",
+      "optionsHeading": "选项",
+      "width": "输出宽度（像素）",
+      "height": "输出高度（像素）",
+      "fitButton": "适配 128x64",
+      "scaleMode": "缩放模式",
+      "scaleOriginal": "原始尺寸",
+      "scaleFit": "缩放适配",
+      "scaleStretch": "拉伸填充",
+      "background": "背景",
+      "backgroundBlack": "黑色（不点亮）",
+      "backgroundWhite": "白色（点亮）",
+      "backgroundHint": "填充留白，并透过透明像素显示。",
+      "placement": "放置位置",
+      "center": "在画布居中",
+      "threshold": "亮度阈值",
+      "thresholdHint": "亮度高于此值的像素将在显示屏上点亮。",
+      "dither": "抖动",
+      "ditherNone": "无",
+      "ditherBayer": "Bayer 4x4",
+      "ditherFloyd": "Floyd-Steinberg",
+      "ditherAtkinson": "Atkinson",
+      "transform": "变换",
+      "invert": "反相",
+      "flipH": "水平翻转",
+      "flipV": "垂直翻转",
+      "drawMode": "绘制模式",
+      "drawHorizontal": "水平（Adafruit GFX drawBitmap）",
+      "drawVertical": "垂直（SSD1306 页缓冲）",
+      "drawHorizontalHint": "每像素 1 位，最高位优先，每行补齐为完整字节。这正是 display.drawBitmap() 所期望的格式。",
+      "drawVerticalHint": "每 8 行一页，每列 1 字节，bit 0 在顶部。这是 SSD1306 显示缓冲区的原始排列。",
+      "format": "输出格式",
+      "formatArduino": "Arduino PROGMEM 数组",
+      "formatPlain": "纯字节",
+      "identifier": "数组名称",
+      "previewHeading": "像素预览",
+      "oledHeading": "在 128x64 SSD1306 上",
+      "oledHint": "位图在面板上居中显示，与模拟器的渲染方式一致。",
+      "outputHeading": "C 字节数组",
+      "bytes": "字节",
+      "copy": "复制",
+      "copied": "已复制",
+      "outputPlaceholder": "添加图片以生成数组。",
+      "credit": "灵感来自 javl 的 image2cpp"
+    }
+  },
+  "examples": {
+    "categories": {
+      "basics": "基础",
+      "sensors": "传感器",
+      "displays": "显示屏",
+      "communication": "通信",
+      "games": "游戏",
+      "robotics": "机器人"
+    }
+  },
+  "boards": {
+    "arduino-uno": "8 位 AVR，32KB flash，14 路数字 I/O",
+    "arduino-nano": "紧凑型 8 位 AVR，同 Uno",
+    "arduino-mega": "8 位 AVR，256KB flash，54 路数字 I/O",
+    "raspberry-pi-pico": "RP2040 双核 Cortex-M0+",
+    "pi-pico-w": "RP2040 + WiFi/蓝牙，与 Pico 共用模拟器",
+    "raspberry-pi-zero": "ARM Cortex-A7，1 核 / 512 MB，Linux/Python（QEMU）",
+    "raspberry-pi-1": "Pi 1 B+，ARM Cortex-A7 配置，Linux/Python（QEMU）",
+    "raspberry-pi-2": "Pi 2B，ARM Cortex-A7 四核，Linux/Python（QEMU）",
+    "raspberry-pi-3": "ARM64 Cortex-A53 四核，Linux/Python（QEMU）",
+    "raspberry-pi-4": "ARM64 Cortex-A72 四核，Linux/Python（QEMU）",
+    "raspberry-pi-5": "ARM64 Cortex-A76 四核 + RP1 I/O，Linux/Python（QEMU）",
+    "esp32": "Xtensa LX6 双核，WiFi+蓝牙，38 路 GPIO（QEMU）",
+    "esp32-devkit-c-v4": "ESP32 DevKit C V4，乐鑫官方（QEMU）",
+    "esp32-cam": "ESP32 + 200 万像素摄像头，microSD（QEMU）",
+    "wemos-lolin32-lite": "紧凑型 ESP32，支持 LiPo 电池（QEMU）",
+    "esp32-s3": "Xtensa LX7 双核，WiFi+蓝牙，AI 加速（QEMU）",
+    "xiao-esp32-s3": "Seeed XIAO 迷你形态，8MB flash + PSRAM（QEMU）",
+    "arduino-nano-esp32": "Nano 形态，ESP32-S3，RGB LED（QEMU）",
+    "esp32-c3": "RISC-V 单核，WiFi+蓝牙，22 路 GPIO（QEMU）",
+    "xiao-esp32-c3": "Seeed XIAO ESP32-C3 迷你开发板（QEMU）",
+    "aitewinrobot-esp32c3-supermini": "ESP32-C3 SuperMini（QEMU）",
+    "stm32-bluepill": "STM32F103C8 Cortex-M3，64KB flash，37 路 GPIO（QEMU）",
+    "stm32-blackpill": "STM32F411CE Cortex-M4，512KB flash，50 路 GPIO（QEMU）",
+    "stm32-bluepill-f103cb": "STM32F103CB Cortex-M3，128KB flash，37 路 GPIO（QEMU）",
+    "stm32-blackpill-f401": "STM32F401CE Cortex-M4，512KB flash，50 路 GPIO（QEMU）",
+    "stm32-f4-discovery": "STM32F407VG Cortex-M4，1MB flash，4 颗板载 LED（QEMU）",
+    "stm32-olimex-h405": "Olimex STM32-H405，F405RG Cortex-M4，1MB flash（QEMU）",
+    "stm32-netduino-plus2": "Netduino Plus 2，STM32F405 Cortex-M4（QEMU）",
+    "stm32-netduino2": "Netduino 2，STM32F205 Cortex-M3（QEMU，串口）",
+    "attiny85": "8 位 AVR，8KB flash，6 路 GPIO（浏览器）",
+    "blurb": {
+      "arduino-uno": "8 位 AVR，32KB flash，14 路数字 I/O",
+      "arduino-mega": "8 位 AVR，256KB flash，54 路数字 I/O",
+      "arduino-nano": "8 位 AVR，32KB flash，面包板尺寸的 Uno",
+      "arduino-nano-esp32": "Nano 形态中的 ESP32-S3，WiFi+蓝牙（QEMU）",
+      "esp32": "Xtensa LX6 双核，WiFi+蓝牙，38 路 GPIO（QEMU）",
+      "esp32-cam": "ESP32 + OV2640 摄像头，可串流至 LCD（QEMU）",
+      "xiao-esp32-s3": "Seeed XIAO 迷你形态，8MB flash + PSRAM（QEMU）",
+      "xiao-esp32-c3": "Seeed XIAO ESP32-C3 迷你开发板（QEMU）",
+      "stm32-bluepill": "STM32F103C8 Cortex-M3，64KB flash，37 路 GPIO（QEMU）",
+      "stm32-blackpill": "STM32F411CE Cortex-M4，512KB flash，50 路 GPIO（QEMU）",
+      "stm32-bluepill-f103cb": "STM32F103CB Cortex-M3，128KB flash，37 路 GPIO（QEMU）",
+      "stm32-blackpill-f401": "STM32F401CE Cortex-M4，512KB flash，50 路 GPIO（QEMU）",
+      "stm32-f4-discovery": "STM32F407VG Cortex-M4，1MB flash，4 颗板载 LED（QEMU）",
+      "stm32-olimex-h405": "Olimex STM32-H405，F405RG Cortex-M4，1MB flash（QEMU）",
+      "stm32-netduino-plus2": "Netduino Plus 2，STM32F405 Cortex-M4（QEMU）",
+      "stm32-netduino2": "Netduino 2，STM32F205 Cortex-M3（QEMU，串口）",
+      "raspberry-pi-pico": "RP2040 双核 Cortex-M0+",
+      "raspberry-pi-3": "ARM64 Cortex-A53 四核，Linux/Python（QEMU）",
+      "raspberry-pi-4": "ARM64 Cortex-A72 四核，Linux/Python（QEMU）",
+      "raspberry-pi-5": "ARM64 Cortex-A76 四核 + RP1 I/O，Linux/Python（QEMU）"
     }
   }
 }

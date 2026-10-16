@@ -16,6 +16,7 @@ import { exampleProjects, subscribeProExamples, getProExamplesVersion } from '..
 import { AppHeader } from '../components/layout/AppHeader';
 import { ExampleThumbnail } from '../components/examples/ExampleThumbnail';
 import { useSEO } from '../utils/useSEO';
+import { useTranslation } from 'react-i18next';
 
 const DOMAIN = 'https://velxio.dev';
 
@@ -29,14 +30,8 @@ const BOARD_LABELS: Record<string, string> = {
   'esp32-c3': 'ESP32-C3',
 };
 
-const CATEGORY_LABELS: Record<string, string> = {
-  basics: 'Basics',
-  sensors: 'Sensors',
-  displays: 'Displays',
-  communication: 'Communication',
-  games: 'Games',
-  robotics: 'Robotics',
-};
+// Example category labels now live in the i18n bundle (common2.json →
+// examples.categories.*) and are read via t(`examples.categories.${id}`).
 
 const DIFFICULTY_COLOR: Record<string, string> = {
   beginner: '#4caf50',
@@ -45,6 +40,7 @@ const DIFFICULTY_COLOR: Record<string, string> = {
 };
 
 export const ExampleDetailPage: React.FC = () => {
+  const { t } = useTranslation();
   // Re-render when the pro overlay registers late examples (dynamic import).
   useSyncExternalStore(subscribeProExamples, getProExamplesVersion, getProExamplesVersion);
 
@@ -123,7 +119,7 @@ export const ExampleDetailPage: React.FC = () => {
   }
 
   const diffColor = DIFFICULTY_COLOR[example.difficulty] ?? 'var(--wb-11)';
-  const categoryLabel = CATEGORY_LABELS[example.category] ?? example.category;
+  const categoryLabel = t(`examples.categories.${example.category}`) ?? example.category;
 
   return (
     <div
